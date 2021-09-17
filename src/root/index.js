@@ -1,10 +1,11 @@
 const {Router, request } = require("express");
-const { getUsers,createUser, getUserById, delUser} = require("../controller/index.controller");
+const { getflowers,createflower, getflowerById, delflower} = require("../controller/index.controller");
 const router = Router();
 
 
-router.get("/users",getUsers)
-router.get("/users/:id",getUserById)
-router.post("/users", createUser)
-router.delete("/users/:id",delUser) 
+router.get("/flowers",getflowers)
+router.get("/flowers/:id",getflowerById)
+router.post("/flowers", createflower)
+router.delete("/flowers/:id",delflower) 
+
 module.exports = router

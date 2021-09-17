@@ -1,37 +1,53 @@
-const { getAllUsers, insertUser,selectUser, deleteUser } = require("../database/databaseQuerys");
+const { getAllflowers, insertflower,selectflower, deleteflower } = require("../jwt/config/databaseQuerys");
+const { MONGO_URI, USER, PASSWORD, PORT, DATABASE } = process.env
+const { Pool } = require("pg")
 
 
-const getUsers = (req, res) => {
-    const users = getAllUsers()
-    console.log(users)
+const pool = new Pool({
+    host: "localhost",
+    user: USER,
+    password: PASSWORD,
+    port: PORT,
+    database: DATABASE
+})
 
-    res.status(200).json(users)
+
+const getflowers = async (req, res) => {
+    const flowers = await getAllflowers()
+    console.log(flowers)
+
+    res.status(200).json(flowers)
 }
 
 
 
-const getUserById = (req, res) => {
+const getflowerById = async (req, res) => {
     id = req.params.id
-
-    res.status(200).json(selectUser(id))
+    arr = await selectflower(id)
+    console.log(arr)
+    res.status(200).json(arr)
     
 }
-const createUser = (req, res) => {
-    const { name, email } = req.body
+const createflower = async (req, res) => {
+    const { name, region ,color } = req.body
 
-
-    res.status(200).json(insertUser(name, email))
+    console.log ("name " + name )
+    const response = await insertflower(name, region ,color)
+    console.log(response)
+    res.status(200).json(response)
 
 }
 
-const delUser = (req, res) =>{
+const delflower = async (req, res) =>{
     id = req.params.id
-    res.status(200).json(deleteUser(id))
+    const element = await deleteflower(id) 
+
+    res.status(200).json( element)
 }
 
 module.exports = {
-    getUsers,
-    getUserById,
-    createUser,
-    delUser
+    getflowers,
+    getflowerById,
+    createflower,
+    delflower
 }
