@@ -44,7 +44,7 @@ async function register(req, res) {
     catch (err) {
         console.log(err)
     }
-
+//edenis
 }
 
 module.exports = {
