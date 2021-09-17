@@ -12,11 +12,11 @@ async function register(req, res) {
 
 
         //veryfying if the user already exist
-        /*
+        
         const oldUser = await user.findOne({ email })
         if (oldUser)
             return res.status(409).send("user aready exist")
-        */
+
         //encypting the pass
         encryptedPass = await bcrypt.hash(password, 11)
 
@@ -34,8 +34,7 @@ async function register(req, res) {
             firstName,
             lastName,
             email.toLowerCase(),
-            encryptedPass,
-            token
+            encryptedPass
         )
 
 
@@ -44,9 +43,15 @@ async function register(req, res) {
     catch (err) {
         console.log(err)
     }
-//edenis
 }
 
+
+async function login (req,res){
+
+    const { email, password} = req.body
+
+}
 module.exports = {
-    register
+    register,
+    login
 }
