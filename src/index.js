@@ -1,6 +1,8 @@
 const { request } = require("express")
 const express = require("express");
-const { register } = require("./controller/auth");
+const { register, login } = require("./controller/auth");
+
+const { verifyingToken } = require("./jwt/middleware/auth")
 
 
 //database connection
@@ -23,8 +25,13 @@ app.use(express.urlencoded({ extended: false }))
 
 // rutas
 app.use(require("./root/index"))
-app.post("/register",register)
-app.post("/login",)//todo
+app.post("/register", register)
+app.post("/login", login)//todo
+app.post("/welcome", verifyingToken, (req, res) => {
+    res.status(200).send("welcome")
+}
+
+)
 
 //runserver
 app.listen(port, () => {

@@ -1,4 +1,4 @@
-const { create } = require("../jwt/model/user")
+const { create, findOne } = require("../jwt/model/user")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
@@ -12,8 +12,9 @@ async function register(req, res) {
 
 
         //veryfying if the user already exist
-        
-        const oldUser = await user.findOne({ email })
+
+        const oldUser = await findOne( email )
+        console.log(oldUser)
         if (oldUser)
             return res.status(409).send("user aready exist")
 
@@ -30,7 +31,7 @@ async function register(req, res) {
             })
 
         //creating the user
-        const user = await create (
+        const user = await create(
             firstName,
             lastName,
             email.toLowerCase(),
@@ -46,9 +47,38 @@ async function register(req, res) {
 }
 
 
-async function login (req,res){
+async function login(req, res) {
+    try {
+        const { email, password } = req.body
 
-    const { email, password} = req.body
+        if (!(email && password)) {
+            res.status(401).send("All input are required")
+        }
+        console.log(email)
+        const user = await findOne(email)
+        console.log(user)
+
+        if (user && (await bcrypt.compare(password, user.pass))) {
+            const token = jwt.sign(
+                {
+                    user_id: email
+                },
+                process.env.TOKEN_KEY,
+                {
+                    expiresIn: "2h"
+                }
+            )
+
+            user.token = token
+
+            res.status(200).json(user)
+        }
+        res.status(400).send("Incorrect credentials")
+
+    } catch (err) {
+
+        console.log(err)
+    }
 
 }
 module.exports = {
