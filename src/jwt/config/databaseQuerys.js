@@ -70,7 +70,7 @@ async function insertflower(name, color, region) {
 
 
     const response = await pool.query(`INSERT INTO flower (name, region, color) values ($1,$2,$3);`, [name, region, color])
-    console.log(response)
+    //console.log(response)
     return response
 }
 
