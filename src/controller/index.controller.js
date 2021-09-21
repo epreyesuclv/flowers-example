@@ -1,4 +1,4 @@
-const { getAllflowers, insertflower,selectflower, deleteflower } = require("../jwt/config/databaseQuerys");
+const { getAllflowers, insertflower,selectflower, deleteflower } = require("../jwt/config/flowersQuerys");
 const { MONGO_URI, USER, PASSWORD, PORT, DATABASE } = process.env
 const { Pool } = require("pg")
 

@@ -1,6 +1,6 @@
 const { request } = require("express")
 const express = require("express");
-const { register, login } = require("./controller/auth");
+const { register, login } = require("./jwt/middleware/auth");
 
 const { verifyingToken } = require("./jwt/middleware/auth")
 
