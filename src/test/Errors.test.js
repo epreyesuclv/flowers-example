@@ -11,6 +11,7 @@ test('Input required works', () => {
     }
 })
 
+//new change, test branches merging
 
 test('database working ', () => {
     try {
