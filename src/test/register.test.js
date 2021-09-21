@@ -6,6 +6,7 @@ const defaultRes = {
 
 
 
-test('registration works', () => {
-    expect(doRegister()).toBe("All input is required")
+test('registration works', async () => {
+    const data = await doRegister();
+    expect(data).toBe("All input is required")
 })

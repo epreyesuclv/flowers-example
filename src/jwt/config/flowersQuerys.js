@@ -57,7 +57,7 @@ async function getAllflowers() {
 
 
     const response = await pool.query(`SELECT * FROM flower`)
-    
+
     return response.rows
 
 
@@ -76,16 +76,16 @@ async function insertflower(name, color, region) {
 
 async function selectflower(id) {
     //write your query select here
-    response = await pool.query(`SELECT * FROM flower WHERE id = ($1)`,[id])
+    response = await pool.query(`SELECT * FROM flower WHERE id = ($1)`, [id])
     return response.rows
 }
 
 async function deleteflower(id) {
     //write your query delete here
-    response = await pool.query(`DELETE FROM flower WHERE id = $1`,[id])
+    response = await pool.query(`DELETE FROM flower WHERE id = $1`, [id])
     return response
 
- 
+
 
 }
 module.exports = {

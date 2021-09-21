@@ -1,9 +1,18 @@
-InputRequire.prototype = Object.create(Error.prototype)
-
-DuplicateEmail.prototype = Object.create(Error.prototype)
-
-IncorrectCredentials.prototype = Object.create(Error.prototype)
-
+class InputRequire extends Error{
+    constructor(){
+        super()
+    }
+}
+class DuplicateEmail extends Error{
+    constructor(){
+        super()
+    }
+}
+class IncorrectCredentials extends Error{
+    constructor(){
+        super()
+    }
+}
 
 module.exports = {
     InputRequire,

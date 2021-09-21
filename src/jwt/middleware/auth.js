@@ -1,25 +1,44 @@
+const { create, findOne } = require("../config/authQuerys")
+const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const { InputRequire, IncorrectCredentials, DuplicateEmail } = require("../../Errors/MyErrors")
+const { cleanLogin, cleanRegister } = require("../authentication/cleanAuth")
 
-function verifyingToken(req, res, next) {
-    const token = req.body.token || req.query || req.headers["access-token"]
 
-    if (!token) {
-        return res.status(403).send("token required")
-    }
+async function register(req, res) {
     try {
 
-        const decode = jwt.verify(token, process.env.TOKEN_KEY)
-        req.user = decode
+        console.log("request", req)
+        const { firstName, lastName, email, password } = req.body
+        try {
+            const user = cleanRegister(firstName, lastName, email, password)
 
+        } catch (IncorrectCredentialError) {
+            res.status(401).send("somthing was wrong with your credentials")
+            //todo
+        }
+        res.status(200).json(user)
     } catch (err) {
-        return res.status(401).send("Invalid Token")
+        console.log(err)
     }
-    next()
+}
+
+async function login(req, res) {
+    try {
+        const { email, password } = req.body
+
+        user = cleanLogin(email, password)
+        return user
+    } catch (err) {
+        //todo
+    }
+
 }
 
 
 
 
 module.exports = {
-    verifyingToken
+    register,
+    login
 }

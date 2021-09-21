@@ -4,7 +4,7 @@ const axios = require('axios')
 
 
 
-function doRegister() {
+async function doRegister() {
     var resp = ""
     const options = {
         method: 'POST',
@@ -12,12 +12,13 @@ function doRegister() {
         headers: { 'Content-Type': 'application/json' },
         data: { name: 'pedrito@gamil.com', password: '1234' }
     };
-    axios.request(options).then(function (response) {
+    resp = await axios.request(options).then(function (response) {
         //console.log( response)
     }).catch(function (error) {
-        resp = error.response.data
+        resp = error.response
     });
-    next()
+    
+    return resp
 }
 
 module.exports = {
