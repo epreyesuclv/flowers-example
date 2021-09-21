@@ -14,17 +14,24 @@ async function cleanLogin(email, password) {
         throw new InputRequire
     }
     //console.log(email)
-    const user = await findOne(email).catch((err)=>{
+    const user = await findOne(email)
+    //console.log(user)
+    if (user === undefined)
         throw new IncorrectCredentials
-    })
+
     //console.log(user)
     if (user && (await bcrypt.compare(password, user.pass))) {
 
         token = getToken(user, email)
 
         user.token = token
+        console.log(user)
         return user
     }
+
+    throw new IncorrectCredentials
+
+
 
 }
 
@@ -40,9 +47,11 @@ async function cleanRegister(firstName, lastName, email, password) {
     //veryfying if the user already exist
     const oldUser = await findOne(email)
     // console.log(oldUser)
+
     if (oldUser)
         //return res.status(409).send("user aready exist")
         throw new DuplicateEmail
+
     //encypting the pass
     encryptedPass = await bcrypt.hash(password, 11)
 
@@ -50,15 +59,15 @@ async function cleanRegister(firstName, lastName, email, password) {
     const token = getToken(email)
 
     //creating the user
-    const user = await create(
+    await create(
         firstName,
         lastName,
         email.toLowerCase(),
         encryptedPass
     )
 
-    if (user === undefined)
-        throw new IncorrectCredentials
+    const user = await findOne(email)
+    user.token = token
 
     return user
 

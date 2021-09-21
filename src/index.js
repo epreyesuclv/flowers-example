@@ -23,16 +23,16 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+
 // rutas
 app.use(require("./root/index"))
 app.post("/register", register)
 app.post("/login", login)//todo
 app.post("/welcome", verifyingToken, (req, res) => {
-    res.status(200).send("welcome")
+    res.status(200).json(req.user)
 }
 
 )
-
 //runserver
 app.listen(port, () => {
     console.log('server is runnig on port ' + port)

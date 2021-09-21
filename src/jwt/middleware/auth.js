@@ -14,6 +14,7 @@ async function register(req, res) {
     try {
 
         const user = await cleanRegister(firstName, lastName, email, password)
+   
         res.status(200).json(user)
 
 
@@ -27,6 +28,8 @@ async function register(req, res) {
             
         if (err instanceof DuplicateEmail)
             res.status(409).send("the user already exist")
+        else 
+        console.log(err)
     }
 
 
@@ -36,8 +39,8 @@ async function login(req, res) {
     try {
         const { email, password } = req.body
 
-        user = await cleanLogin(email, password)
-        return user
+        const user = await cleanLogin(email, password)
+        return res.status(200).json(user)
     } catch (err) {
 
         if (err instanceof IncorrectCredentials)
