@@ -3,6 +3,7 @@ const { create, findOne } = require("../config/authQuerys")
 
 const bcrypt = require("bcryptjs")
 const { IncorrectCredentials, InputRequire, DuplicateEmail } = require("../../Errors/MyErrors")
+const jwt = require("jsonwebtoken")
 
 
 
@@ -13,7 +14,9 @@ async function cleanLogin(email, password) {
         throw new InputRequire
     }
     //console.log(email)
-    const user = await findOne(email)
+    const user = await findOne(email).catch((err)=>{
+        throw new IncorrectCredentials
+    })
     //console.log(user)
     if (user && (await bcrypt.compare(password, user.pass))) {
 
@@ -22,7 +25,6 @@ async function cleanLogin(email, password) {
         user.token = token
         return user
     }
-    throw new IncorrectCredentials
 
 }
 
@@ -36,7 +38,6 @@ async function cleanRegister(firstName, lastName, email, password) {
         throw new InputRequire
 
     //veryfying if the user already exist
-
     const oldUser = await findOne(email)
     // console.log(oldUser)
     if (oldUser)

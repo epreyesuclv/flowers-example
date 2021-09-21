@@ -10,7 +10,7 @@ async function doRegister() {
         method: 'POST',
         url: 'http://localhost:4000/register',
         headers: { 'Content-Type': 'application/json' },
-        data: { name: 'pedrito@gamil.com', password: '1234' }
+        data: { email: 'pedrito@gamil.com', password: '1234' , firstName: "pedro", lastName: "perez" }
     };
     resp = await axios.request(options).then(function (response) {
         //console.log( response)

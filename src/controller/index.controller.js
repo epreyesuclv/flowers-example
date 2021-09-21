@@ -14,7 +14,7 @@ const pool = new Pool({
 
 const getflowers = async (req, res) => {
     const flowers = await getAllflowers()
-    console.log(flowers)
+    //console.log(flowers)
 
     res.status(200).json(flowers)
 }
@@ -24,16 +24,16 @@ const getflowers = async (req, res) => {
 const getflowerById = async (req, res) => {
     id = req.params.id
     arr = await selectflower(id)
-    console.log(arr)
+    //console.log(arr)
     res.status(200).json(arr)
     
 }
 const createflower = async (req, res) => {
     const { name, region ,color } = req.body
 
-    console.log ("name " + name )
+    //console.log ("name " + name )
     const response = await insertflower(name, region ,color)
-    console.log(response)
+    //console.log(response)
     res.status(200).json(response)
 
 }

@@ -6,31 +6,46 @@ const { cleanLogin, cleanRegister } = require("../authentication/cleanAuth")
 
 
 async function register(req, res) {
+
+    //console.log("request", req)
+    const { firstName, lastName, email, password } = req.body
+
+
     try {
 
-        console.log("request", req)
-        const { firstName, lastName, email, password } = req.body
-        try {
-            const user = cleanRegister(firstName, lastName, email, password)
-
-        } catch (IncorrectCredentialError) {
-            res.status(401).send("somthing was wrong with your credentials")
-            //todo
-        }
+        const user = await cleanRegister(firstName, lastName, email, password)
         res.status(200).json(user)
+
+
     } catch (err) {
-        console.log(err)
+
+        if (err instanceof IncorrectCredentials)
+            res.status(401).send("somthing was wrong with your credentials")
+
+        if (err instanceof InputRequire)
+            res.status(402).send("all input is require")
+            
+        if (err instanceof DuplicateEmail)
+            res.status(409).send("the user already exist")
     }
+
+
 }
 
 async function login(req, res) {
     try {
         const { email, password } = req.body
 
-        user = cleanLogin(email, password)
+        user = await cleanLogin(email, password)
         return user
     } catch (err) {
-        //todo
+
+        if (err instanceof IncorrectCredentials)
+            res.status(401).send("Incorrect creedentials")
+
+        if (err instanceof InputRequire)
+            res.status(409).send("All input is require")
+
     }
 
 }
