@@ -1,24 +1,23 @@
 const { InputRequire, IncorrectCredentials } = require("../Errors/MyErrors")
-const { cleanLogin } = require("../jwt/authentication/cleanAuth")
+const { cleanLogin, cleanRegister } = require("../jwt/authentication/cleanAuth")
 
 
-test('Input required works', () => {
+test('Input required works in login', async () => {
     try {
-        cleanLogin()
+        await cleanLogin()
     }
     catch (err) {
-        expect(err.name).toBe(InputRequire)
+        expect(typeof err).toBe(typeof new InputRequire())
+    }
+
+})
+
+test('Input require works in register', async () => {
+    try {
+        await cleanRegister()
+    } catch (err) {
+        expect(typeof err).toBe(typeof new InputRequire())
     }
 })
 
-//new change, test branches merging
-
-test('database working ', () => {
-    try {
-        cleanLogin("asdf", "asdf")
-    }
-    catch (err) {
-        expect(err.name).toBe(IncorrectCredentials)
-    }
-})
 
