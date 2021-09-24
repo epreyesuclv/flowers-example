@@ -1,6 +1,7 @@
 
-const { doCreate, doDelete, doGetAll, doGetById } = require("./elementTest")
-let idToDelete
+const {defaultElemet, doCreate, doDelete, doGetAll, doGetById } = require("./elementTest")
+
+
 let data
 //const element = { name: "rosa", region: "america", color: "rojo" }
 
@@ -10,15 +11,16 @@ test('operations with elements', async () => {
     //check insert
     data = await doCreate()
     expect(data.status).toBe(200)
+    expect(data.element.toString()).toBe(defaultElemet.toString())
 
-    idToDelete = data.id
     //console.log(idToDelete)
     //check get By id
-    data = await doGetById(idToDelete)
+    data = await doGetById(defaultElemet.name)
     expect(data.status).toBe(200)
+    expect(data.element.toString()).toBe(defaultElemet.toString())
 
     //check delete
-    data = await doDelete(idToDelete)
+    data = await doDelete(defaultElemet.name)
     expect(data.status).toBe(200)
 
 
@@ -31,4 +33,6 @@ test('get all elements', async () => {
     expect(data.status).toBe(200)
 
 })
+
+
 

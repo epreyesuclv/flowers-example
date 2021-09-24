@@ -1,31 +1,37 @@
 const axios = require('axios')
 
-async function doCreate() {
+const defaultElemet = { name: "hes", region: "america", color: "rojo" }
 
+async function doCreate() {
+    let element = {}
     const options = {
         method: 'POST',
         url: 'http://localhost:4000/flowers',
         headers: { 'Content-Type': 'application/json' },
-        data: { name: "rosa", region: "america", color: "rojo" }
+        data: defaultElemet
     };
 
     await axios.request(options).then(function (response) {
-        status = response.status
-        id = response.id
         //console.log("in elementTest ",response)
+        status = response.status
+        element = response.data
+       
     }).catch(function (error) {
         status = error.response.status
+        //console.log("in elementTest ",error)
         //console.log (error.response)
     });
     return {
         status: status,
-        id: id
+        element: element
     }
 
 }
 
 
 async function doGetById(id) {
+
+    let element = {}
     const options = {
         method: 'GET',
         url: `http://localhost:4000/flowers/${id}`,
@@ -35,13 +41,14 @@ async function doGetById(id) {
 
     await axios.request(options).then(function (response) {
         status = response.status
+        element = response.data
     }).catch(function (error) {
         status = error.response.status
         //console.log (error)
     });
     return {
-        status: status
-
+        status: status,
+        element: element
     }
 }
 
@@ -56,7 +63,7 @@ async function doDelete(id) {
     await axios.request(options).then(function (response) {
 
         status = response.status
-       // console.log (response)
+        // console.log (response)
     }).catch(function (error) {
 
         status = error.response.status
@@ -92,6 +99,7 @@ async function doGetAll() {
 
 
 module.exports = {
+    defaultElemet,
     doCreate,
     doDelete,
     doGetAll,

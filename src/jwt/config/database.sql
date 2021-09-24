@@ -11,8 +11,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE flower (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR (40),
+    name VARCHAR (40) PRIMARY KEY ,
     region TEXT,
     color VARCHAR(40)
 );

@@ -25,7 +25,7 @@ async function cleanLogin(email, password) {
         token = getToken(user, email)
 
         user.token = token
-        console.log(user)
+        //console.log("in cleanAuth",user)
         return user
     }
 
