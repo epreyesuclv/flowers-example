@@ -1,5 +1,5 @@
-const { InputRequire, IncorrectCredentials } = require("../Errors/MyErrors")
-const { cleanLogin, cleanRegister } = require("../jwt/authentication/cleanAuth")
+const { InputRequire, IncorrectCredentials } = require("../../Errors/MyErrors")
+const { cleanLogin, cleanRegister } = require("../../jwt/authentication/cleanAuth")
 
 
 test('Input required works in login', async () => {

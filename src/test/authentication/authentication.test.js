@@ -1,4 +1,4 @@
-const { doRegister, doRegisterWithToken, doLogin } = require('./request/authentication')
+const { doRegister, doRegisterWithToken, doLogin } = require('./authentication')
 
 
 let token;

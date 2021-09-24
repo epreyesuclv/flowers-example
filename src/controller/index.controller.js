@@ -33,7 +33,7 @@ const createflower = async (req, res) => {
 
     //console.log ("name " + name )
     const response = await insertflower(name, region ,color)
-    //console.log(response)
+    //console.log("in index.controller",response)
     res.status(200).json(response)
 
 }

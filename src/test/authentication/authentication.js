@@ -27,6 +27,7 @@ async function doRegister() {
         status: status
     }
 }
+
 async function doLogin() {
     let status = "";
     let token;
@@ -54,6 +55,7 @@ async function doLogin() {
         status: status
     }
 }
+
 async function doRegisterWithToken(token) {
     let status = "";
     const options = {
@@ -67,7 +69,7 @@ async function doRegisterWithToken(token) {
         //console.log(response)
     }).catch(function (error) {
         status = error.response.status
-        //console.log(error.response.status)
+        //console.log("token ",error.response)
     });
     //console.log(resp)
     return {
