@@ -1,6 +1,5 @@
-const { getAllflowers, selectflower } = require("../fetchData/flowersQuerys");
+
 const { MONGO_URI, USER, PASSWORD, PORT, DATABASE } = process.env
-const { Pool } = require("pg");
 
 const { buyFlowerNode } = require("../../backBuisness/fetchData/requestData");
 
@@ -18,7 +17,7 @@ const getflowers = async (req, res) => {
     // while(true);
     const flowers = await getAllflowers()
     //console.log(flowers)
-
+    
     res.status(200).json(flowers)
 }
 

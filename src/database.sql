@@ -9,6 +9,7 @@ CREATE TABLE usersBack (
     token TEXT
 
 );
+
 CREATE TABLE usersFront (
     firstName VARCHAR (40),
     lastName VARCHAR(40),
