@@ -1,3 +1,2 @@
-#use "/" for modules, literals name for specific file  
 .env
 node_modules/
