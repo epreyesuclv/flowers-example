@@ -1,5 +1,7 @@
 const { Pool } = require("pg")
-const { selectflower } = require("../../frontBuisness/fetchData/flowersQuerys")
+const { selectflower, Flower } = require("../../models/flowers")
+const { UserBack } = require("../../models/userBack")
+const { FlowerOwner } = require("../../models/flowerOwner")
 const { DATABASE, PASSWORD, USER, PORT } = process.env
 const pool = new Pool({
     host: "localhost",
@@ -13,41 +15,50 @@ const pool = new Pool({
 
 //get all vendor given a flower
 async function getAllVendor(flowerName) {
-    const response = pool.query(`SELECT ownerName FROM flowerOwner WHERE flowerName = ${flowerName}`)
-    return response.rows
+
+    const response = FlowerOwner.findAll({
+        where: {
+            FlowerName: flowerName
+        }
+    }).catch(handlercatch)
+
+    return response
 }
 
 
 
 
-async function insertflower(name, owner, region, color) {
+async function insertflower(name, region, color) {
 
     //write your query insert here
+    const response = await Flower.create({ name: name, region: region, color: color })
 
-    await pool.query(`INSERT INTO flower (name, region, color) values ($1,$2,$3);`, [name, region, color])
     //console.log(response)
 
-    return await selectflower(name)
+    return response
 }
 
 
 //insert new one vendor's flower
 
-
 async function insertflowerOnwer(name, owner) {
 
-    await pool.query(`INSERT INTO flowerOwner (flowerName,OwnerName) values ($1,$2)`, [name, owner])
+    const response = await FlowerOwner.create({ flowerName: name, ownerName: owner })
 
-    return await selectflower(name)
+    return response
 }
 
 
 async function selectflowerOwner(id, email) {
 
     //write your query select here
-    const response = await pool.query(`SELECT * FROM flowerOwner WHERE (flowerName = ($1) and ownerName = ($2))`, [id, email])
-    
-    return response.rows[0]
+    const response = await FlowerOwner.findAll({
+        where: {
+            flowerName: id,
+            ownerName: email
+        }
+    })
+    return response
 }
 
 
@@ -55,8 +66,11 @@ async function selectflowerOwner(id, email) {
 
 async function deleteflower(idflower, owner) {
     //write your query delete here
-
-    const response = await pool.query(`DELETE FROM flowerOwner WHERE (flowerName = $1 and flowerOwner = $2 ) `, [idflower, owner])
+    await FlowerOwner.destroy({
+        where: {
+            flowerName: idflower,
+            ownerName: owner
+        })
     return response
 }
 
@@ -64,7 +78,6 @@ async function deleteflower(idflower, owner) {
 module.exports = {
     deleteflower,
     getAllVendor,
-    selectflower,
     selectflowerOwner,
     insertflower,
     insertflowerOnwer

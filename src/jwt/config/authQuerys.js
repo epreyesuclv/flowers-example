@@ -1,38 +1,37 @@
-const { Pool } = require("pg")
-const { DATABASE, PASSWORD, USER, PORT } = process.env
-const pool = new Pool({
-    host: "localhost",
-    user: "postgres",
-    password: "1234",
-    port: "5432",
-    database: "auth"
-})
 
+const { UserBack } = require("../../models/userBack")
+const { UserFront } = require("../../models/userFront")
 
-async function create(firstName, lastName, email, password, token, endPoint) {
-    let response = ""
-    if (endPoint)
-        response = await pool.query(`INSERT INTO usersBack (firstname, lastname, email, pass,endPoint token) values ($1,$2,$3,$4,$5,$6);`, [firstName, lastName, email, password, endPoint, token]);
+async function create(data) {
+    let response
+    if (data.endPoint)
+
+        response = await UserBack.create(data).catch(handlercatch)
     else
-        response = await pool.query(`INSERT INTO usersFront (firstname, lastname, email, pass token) values ($1,$2,$3,$4,$5);`, [firstName, lastName, email, password, token]);
+        response = await UserFront.create(data).catch(handlercatch)
 
-    return response.rows[0]
+    return response.toJSON()
 
 }
 
 
 async function findOneBack(email) {
 
-    const response = await pool.query(`SELECT * FROM usersBack WHERE email = ($1)`, [email])
-    return response.rows[0]
+    const response = await UserBack.findByPk(email).catch(handlercatch)
 
+    return response
 }
 
 async function findOneFront(email) {
 
-    const response = await pool.query(`SELECT * FROM usersFront WHERE email = ($1)`, [email])
-    return response.rows[0]
+    const response = await UserBack.findByPk(email).catch(handlercatch)
 
+    return response
+
+}
+
+function handlercatch(err) {
+    console.log("authquerys-handlercatcher")
 }
 
 module.exports = {
