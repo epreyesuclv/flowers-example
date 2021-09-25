@@ -1,62 +1,46 @@
-const { create, findOne } = require("../config/authQuerys")
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-const { InputRequire, IncorrectCredentials, DuplicateEmail } = require("../../Errors/MyErrors")
-const { cleanLogin, cleanRegister } = require("../authentication/cleanAuth")
+const { login, register } = require("../authentication/auth")
 
 
-async function register(req, res) {
+//the back authentication is not actually needed but I will include for future changes
+async function backLogin(req, res) {
+    req.body.busy = "back"
 
-    //console.log("request", req)
-    const { firstName, lastName, email, password } = req.body
-
-
-    try {
-
-        const user = await cleanRegister(firstName, lastName, email, password)
-   
-        res.status(200).json(user)
-
-
-    } catch (err) {
-
-        if (err instanceof IncorrectCredentials)
-            res.status(401).send("somthing was wrong with your credentials")
-
-        if (err instanceof InputRequire)
-            res.status(402).send("all input is require")
-            
-        if (err instanceof DuplicateEmail)
-            res.status(409).send("the user already exist")
-        else 
-        console.log(err)
-    }
-
+    await login(req, res)
 
 }
 
-async function login(req, res) {
-    try {
-        const { email, password } = req.body
 
-        const user = await cleanLogin(email, password)
-        return res.status(200).json(user)
-    } catch (err) {
+//the back authentication is not actually needed but I will include for future changes
+async function backRegister(req, res) {
 
-        if (err instanceof IncorrectCredentials)
-            res.status(401).send("Incorrect creedentials")
 
-        if (err instanceof InputRequire)
-            res.status(409).send("All input is require")
+    req.body.busy = "back"
 
-    }
+    await register(req, res)
+}
+
+
+async function frontRegister(req, res) {
+    req.body.busy = "front"
+
+    await register(req, res)
+}
+
+
+async function frontLogin(req, res) {
+    req.body.busy = "front"
+
+    await login(req, res)
 
 }
+
 
 
 
 
 module.exports = {
-    register,
-    login
+    backLogin,
+    frontLogin,
+    backRegister,
+    frontRegister
 }

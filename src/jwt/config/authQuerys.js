@@ -1,29 +1,41 @@
-const { Pool } = require("pg")
-const { DATABASE, PASSWORD, USER, PORT } = process.env
-const pool = new Pool({
-    host: "localhost",
-    user: "postgres",
-    password: "1234",
-    port: "5432",
-    database: "auth"
-})
 
+const { UserBack } = require("../../models/userBack")
+const { UserFront } = require("../../models/userFront")
 
-async function create(firstName, lastName, email, password, token) {
+async function create(data) {
+    let response
+    if (data.endPoint)
 
-    const response = await pool.query(`INSERT INTO users (firstname, lastname, email, pass, token) values ($1,$2,$3,$4,$5);`, [firstName, lastName, email, password, token])
-    
-    return response.rows[0]
+        response = await UserBack.create(data).catch(handlercatch)
+    else
+        response = await UserFront.create(data).catch(handlercatch)
+
+    return response?.toJSON() ?? "ya existe este usuario"
 
 }
-async function findOne(email) {
 
-    const response = await pool.query(`SELECT * FROM users WHERE email = ($1)`, [email])
-    return response.rows[0]
 
+async function findOneBack(email) {
+
+    const response = await UserBack.findByPk(email).catch(handlercatch)
+    console.log("user finded succeful")
+    return response
+}
+
+async function findOneFront(email) {
+
+    const response = await UserFront.findByPk(email).catch(handlercatch)
+    //console.log("authQuerys ",response.toJSON())
+    return response
+
+}
+
+function handlercatch(err) {
+    console.log("authquerys-handlercatcher",err)
 }
 
 module.exports = {
-    findOne,
+    findOneBack,
+    findOneFront,
     create
 }

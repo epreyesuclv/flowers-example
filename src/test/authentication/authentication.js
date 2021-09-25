@@ -1,26 +1,23 @@
 
 
-const axios = require('axios')
+const axios = require('axios');
+const { response } = require('express');
 
 const USER_EMAIL = "lderty@gmail.com"
 const USER_PASS = "1234"
 
+let status;
+let token;
+
 async function doRegister() {
-    let status;
-    let token;
+
     const options = {
         method: 'POST',
         url: 'http://localhost:4000/register',
         headers: { 'Content-Type': 'application/json' },
         data: { email: USER_EMAIL, password: USER_PASS, firstName: "pedro", lastName: "perez" }
     };
-    await axios.request(options).then(function (response) {
-        status = response.status
-        token = response.data.token
-    }).catch(function (error) {
-        status = error.response.status
-        //console.log (error.response)
-    });
+    await axios.request(options).then(handlerThen).catch(handlerCatch);
     //console.log(resp)
     return {
         token: token,
@@ -29,8 +26,7 @@ async function doRegister() {
 }
 
 async function doLogin() {
-    let status = "";
-    let token;
+
     const options = {
         method: 'POST',
         url: 'http://localhost:4000/login',
@@ -40,15 +36,7 @@ async function doLogin() {
             password: USER_PASS
         }
     };
-    await axios.request(options).then(function (response) {
-        status = response.status
-        token = response.data.token
-        //console.log(response)
-    }).catch(function (error) {
-        status = error.response.status
-
-        //console.log(error.response.token)
-    });
+    await axios.request(options).then(handlerThen).catch(handlerCatch);
     //console.log(resp)
     return {
         token: token,
@@ -57,24 +45,26 @@ async function doLogin() {
 }
 
 async function doRegisterWithToken(token) {
-    let status = "";
     const options = {
         method: 'POST',
         url: 'http://localhost:4000/welcome',
         headers: { 'Content-Type': 'application/json' },
         data: { token: token }
     };
-    await axios.request(options).then(function (response) {
-        status = response.status
-        //console.log(response)
-    }).catch(function (error) {
-        status = error.response.status
-        //console.log("token ",error.response)
-    });
+    await axios.request(options).then(handlerThen).catch(handlerCatch);
     //console.log(resp)
     return {
         status: status
     }
+}
+
+function handlerThen(response) {
+    status = response?.status ?? "not server found"
+    token = response ?? ""
+}
+
+function handlerCatch(err) {
+    status = err.response?.status ?? " not server found"
 }
 module.exports = {
     doRegister,
