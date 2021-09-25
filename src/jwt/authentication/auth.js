@@ -1,7 +1,6 @@
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
+
 const { InputRequire, IncorrectCredentials, DuplicateEmail } = require("../../Errors/MyErrors")
-const { cleanLogin, cleanRegister } = require(".cleanAuth")
+const { cleanLogin, cleanRegister } = require("../authentication/cleanAuth")
 
 
 async function register(req, res) {

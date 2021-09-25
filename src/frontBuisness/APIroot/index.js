@@ -1,8 +1,8 @@
 const { Router, request } = require("express");
-const { getflowers, getflowerById,buyFlower } = require("../frontBuisness/index.controller");
+const { getflowers, getflowerById, buyFlower } = require("../controller/index.controller");
 const router = Router();
 
-const { verifyingToken } = require("../jwt/middleware/authToken")
+const { verifyingToken } = require("../../jwt/middleware/authToken")
 
 
 

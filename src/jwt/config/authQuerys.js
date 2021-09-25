@@ -10,14 +10,11 @@ const pool = new Pool({
 
 
 async function create(firstName, lastName, email, password, token, endPoint) {
+    let response = ""
     if (endPoint)
-        const response = await pool.query(
-            `INSERT INTO usersBack (firstname, lastname, email, pass,endPoint token) values ($1,$2,$3,$4,$5,$6);`,
-            [firstName, lastName, email, password, endPoint, token])
+        response = await pool.query(`INSERT INTO usersBack (firstname, lastname, email, pass,endPoint token) values ($1,$2,$3,$4,$5,$6);`, [firstName, lastName, email, password, endPoint, token]);
     else
-        const response = await pool.query(
-            `INSERT INTO usersFront (firstname, lastname, email, pass token) values ($1,$2,$3,$4,$5);`,
-            [firstName, lastName, email, password, token])
+        response = await pool.query(`INSERT INTO usersFront (firstname, lastname, email, pass token) values ($1,$2,$3,$4,$5);`, [firstName, lastName, email, password, token]);
 
     return response.rows[0]
 
