@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 
 function verifyingToken(req, res, next) {
-    const token = req.body.token || req.query || req.headers["access-token"]
+    let token = req.body.token || req.query || req.headers["access-token"]
 
     if (!token) {
         return res.status(403).send("token required")
@@ -9,6 +9,7 @@ function verifyingToken(req, res, next) {
     try {
 
         const decode = jwt.verify(token, process.env.TOKEN_KEY)
+        token = ""
         req.user = decode
 
     } catch (err) {

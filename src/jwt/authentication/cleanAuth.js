@@ -1,5 +1,5 @@
 
-const { create, findOne } = require("../config/authQuerys")
+const { create, findOneBack, findOneFront } = require("../config/authQuerys")
 
 const bcrypt = require("bcryptjs")
 const { IncorrectCredentials, InputRequire, DuplicateEmail } = require("../../Errors/MyErrors")
@@ -8,13 +8,19 @@ const jwt = require("jsonwebtoken")
 
 
 //throw: InputRequireError , IncorrectCredentialError
-async function cleanLogin(email, password) {
+async function cleanLogin(email, password, busy) {
 
     if (!(email && password)) {
         throw new InputRequire
     }
     //console.log(email)
-    const user = await findOne(email)
+
+
+    const func = (busy == "back") ? findOneBack : findOneFront
+
+    //veryfying if the user already exist
+
+    const oldUser = await func(email)
     //console.log(user)
     if (user === undefined)
         throw new IncorrectCredentials
@@ -37,15 +43,18 @@ async function cleanLogin(email, password) {
 
 
 //throws : IntputRequireError , DuplicateEmailError , IncorrectCredentialsError
-async function cleanRegister(firstName, lastName, email, password) {
+async function cleanRegister(firstName, lastName, email, password, busy, endPoint) {
 
     //veryfiying if the fields are empty
     if (!(email && password && firstName && lastName))
         // res.status(400).send("All input is required")
         throw new InputRequire
 
+    const func = (busy == "back") ? findOneBack : findOneFront
+
     //veryfying if the user already exist
-    const oldUser = await findOne(email)
+
+    const oldUser = await func(email)
     // console.log(oldUser)
 
     if (oldUser)
@@ -63,10 +72,11 @@ async function cleanRegister(firstName, lastName, email, password) {
         firstName,
         lastName,
         email.toLowerCase(),
-        encryptedPass
+        encryptedPass,
+        endPoint
     )
 
-    const user = await findOne(email)
+    const user = await func(email)
     user.token = token
 
     return user

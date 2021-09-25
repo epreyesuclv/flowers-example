@@ -1,10 +1,12 @@
-const {Router, request } = require("express");
-const { getflowers,createflower, getflowerById, delflower} = require("../controller/index.controller");
+const { Router, request } = require("express");
+const { getflowers, getflowerById,buyFlower } = require("../frontBuisness/index.controller");
 const router = Router();
 
+const { verifyingToken } = require("../jwt/middleware/authToken")
 
-router.get("/flowers",getflowers)
-router.get("/flowers/:name",getflowerById)
-router.post("/flowers", createflower)
-router.delete("/flowers/:name",delflower) 
+
+
+router.get("/flowers", getflowers)
+router.get("/flowers/:name", getflowerById)
+router.post("/buy", verifyingToken, buyFlower)
 module.exports = router

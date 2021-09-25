@@ -1,9 +1,6 @@
 const { request } = require("express")
 const express = require("express");
-const { register, login } = require("./jwt/middleware/auth");
-
-const { verifyingToken } = require("./jwt/middleware/authToken")
-
+const { frontRegister, frontLogin , backRegister, backLogin} = require("./jwt/middleware/auth");
 
 //database connection
 require("dotenv").config()
@@ -26,13 +23,11 @@ app.use(express.urlencoded({ extended: false }))
 
 // rutas
 app.use(require("./root/index"))
-app.post("/register", register)
-app.post("/login", login)//todo
-app.post("/welcome", verifyingToken, (req, res) => {
-    res.status(200).json(req.user)
-}
+app.post("/back_register", backRegister)
+app.post("/back_login", backLogin)
+app.post("/front_register", frontRegister)
+app.post("/front_login", frontLogin)
 
-)
 //runserver
 app.listen(port, () => {
     console.log('server is runnig on port ' + port)

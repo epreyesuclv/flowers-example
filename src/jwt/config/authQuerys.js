@@ -9,21 +9,37 @@ const pool = new Pool({
 })
 
 
-async function create(firstName, lastName, email, password, token) {
+async function create(firstName, lastName, email, password, token, endPoint) {
+    if (endPoint)
+        const response = await pool.query(
+            `INSERT INTO usersBack (firstname, lastname, email, pass,endPoint token) values ($1,$2,$3,$4,$5,$6);`,
+            [firstName, lastName, email, password, endPoint, token])
+    else
+        const response = await pool.query(
+            `INSERT INTO usersFront (firstname, lastname, email, pass token) values ($1,$2,$3,$4,$5);`,
+            [firstName, lastName, email, password, token])
 
-    const response = await pool.query(`INSERT INTO users (firstname, lastname, email, pass, token) values ($1,$2,$3,$4,$5);`, [firstName, lastName, email, password, token])
-    
     return response.rows[0]
 
 }
-async function findOne(email) {
 
-    const response = await pool.query(`SELECT * FROM users WHERE email = ($1)`, [email])
+
+async function findOneBack(email) {
+
+    const response = await pool.query(`SELECT * FROM usersBack WHERE email = ($1)`, [email])
+    return response.rows[0]
+
+}
+
+async function findOneFront(email) {
+
+    const response = await pool.query(`SELECT * FROM usersFront WHERE email = ($1)`, [email])
     return response.rows[0]
 
 }
 
 module.exports = {
-    findOne,
+    findOneBack,
+    findOneFront,
     create
 }
