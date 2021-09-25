@@ -35,7 +35,7 @@ CREATE TABLE public."flowerOwner"
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 ,
-    FOREIGN KEY ("flowerName")
+    FOREIGN KEY ("ownerName")
         REFERENCES public.usersBack (email) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION

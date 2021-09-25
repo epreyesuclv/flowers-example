@@ -13,11 +13,19 @@ const pool = new Pool({
     database: DATABASE
 })
 
+
+
+async function selectflower(id) {
+    //write your query select here
+    const response = await pool.query(`SELECT * FROM flower WHERE name = ($1)`, [id])
+    return response.rows[0]
+}
+
 async function getAllflowers() {
     //write your querys here
 
 
-    const response = await pool.query(`SELECT * FROM flower`)
+    const response = await pool.query(`SELECT * FROM flower WHERE flower.name in (SELECT flowerName FROM flowerOnwner);  `)
 
     return response.rows
 
@@ -28,5 +36,6 @@ async function getAllflowers() {
 
 module.exports = {
     getAllflowers,
+    selectflower
 
 }

@@ -1,4 +1,4 @@
-const { getAllflowers } = require("../fetchData/flowersQuerys");
+const { getAllflowers, selectflower } = require("../fetchData/flowersQuerys");
 const { MONGO_URI, USER, PASSWORD, PORT, DATABASE } = process.env
 const { Pool } = require("pg");
 
