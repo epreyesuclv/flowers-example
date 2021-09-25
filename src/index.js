@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 // rutas
-app.use(require("./root/index"))
+app.use(require("./frontBuisness/APIroot/index"))
 app.post("/back_register", backRegister)
 app.post("/back_login", backLogin)
 app.post("/front_register", frontRegister)
