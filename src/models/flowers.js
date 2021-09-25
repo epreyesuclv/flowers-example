@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const { Model, DataTypes } = require("sequelize");
+=======
+const { Model, DataTypes } = require("sequelize/types");
+>>>>>>> end users querys and flowers querys
 const { sequelize } = require("./connection")
 
 

@@ -1,7 +1,7 @@
 
 const { Pool } = require("pg")
-
-const { MONGO_URI, USER, PASSWORD, PORT, DATABASE } = process.env
+require("dotenv").config
+const {  USER, PASSWORD, PORT, DATABASE } = process.env
 
 const { buyFlowerNode } = require("../../fetchData/requestData");
 const { getAllflowers } = require("../../fetchData/floweQuerys")
@@ -19,7 +19,7 @@ const getflowers = async (req, res) => {
     // while(true);
     const flowers = await getAllflowers()
     //console.log(flowers)
-
+    
     res.status(200).json(flowers)
 }
 
