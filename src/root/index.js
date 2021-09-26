@@ -4,7 +4,7 @@ const router = Router();
 
 
 router.get("/flowers",getflowers)
-router.get("/flowers/:id",getflowerById)
+router.get("/flowers/:name",getflowerById)
 router.post("/flowers", createflower)
-router.delete("/flowers/:id",delflower) 
+router.delete("/flowers/:name",delflower) 
 module.exports = router

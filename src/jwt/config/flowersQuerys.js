@@ -65,24 +65,25 @@ async function getAllflowers() {
 }
 
 
-async function insertflower(name, color, region) {
+async function insertflower(name, region, color) {
     //write your query insert here
 
 
-    const response = await pool.query(`INSERT INTO flower (name, region, color) values ($1,$2,$3);`, [name, region, color])
+    await pool.query(`INSERT INTO flower (name, region, color) values ($1,$2,$3);`, [name, region, color])
+    
     //console.log(response)
-    return response
+    return await selectflower(name)
 }
 
 async function selectflower(id) {
     //write your query select here
-    response = await pool.query(`SELECT * FROM flower WHERE id = ($1)`, [id])
-    return response.rows
+    response = await pool.query(`SELECT * FROM flower WHERE name = ($1)`, [id])
+    return response.rows[0]
 }
 
 async function deleteflower(id) {
     //write your query delete here
-    response = await pool.query(`DELETE FROM flower WHERE id = $1`, [id])
+    response = await pool.query(`DELETE FROM flower WHERE name = $1`, [id])
     return response
 
 

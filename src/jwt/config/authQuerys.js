@@ -12,6 +12,7 @@ const pool = new Pool({
 async function create(firstName, lastName, email, password, token) {
 
     const response = await pool.query(`INSERT INTO users (firstname, lastname, email, pass, token) values ($1,$2,$3,$4,$5);`, [firstName, lastName, email, password, token])
+    
     return response.rows[0]
 
 }
