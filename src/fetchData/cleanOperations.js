@@ -4,15 +4,15 @@ async function cleanInsert(data, email) {
 
 
 
-    const old = await selectFlowerOwner(data, email)
-    const oldFlower = await selectFlowerOwner(data, email)
-    console.log("cleanOperatins-cleanInsert", [old, oldFlower])
-    if (!oldFlower) {
-        console.log("cleanOperatins-cleanInsert",data)
+    const old = await selectFlowerOwner(data.name, email)
+    const oldFlower = await selectFlowerOwner(data.name, email)
+    if (!(oldFlower.length)) {
+        console.log("cleanOperatins-cleanInsert", [old, oldFlower])
+
         await insertFlower(data.name, data.region, data.color)
         await insertFlowerOnwer(data.name, email)
 
-    } else if (!old) {
+    } else if (!old.length) {
 
         await insertFlowerOnwer(data.name, email)
 

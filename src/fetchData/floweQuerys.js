@@ -26,6 +26,7 @@ async function getVendors(flowerName) {
         }
     }).catch(handlercatch)
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log("flowersQuerys-getVendors", flowerName)
     let vendors = []
 
@@ -38,6 +39,13 @@ console.log(response)
     for (vendor in response) {
         vendors.push(await FlowerOwner.findByPk(vendor))
 >>>>>>> almost finished
+=======
+    console.log("flowersQuerys-getVendors", flowerName)
+    let vendors = []
+
+    for (let vendor of response) {
+        vendors.push(await UserBack.findByPk(vendor.ownerName))
+>>>>>>> the next todo is the auth betwen main and node
     }
 
     return vendors
@@ -47,10 +55,14 @@ async function getAllVendor() {
 
     const response = await UserBack.findAll()
 <<<<<<< HEAD
+<<<<<<< HEAD
     //console.log("flowersQuerys ",response)
 =======
         //console.log("flowersQuerys ",response)
 >>>>>>> almost finished
+=======
+    //console.log("flowersQuerys ",response)
+>>>>>>> the next todo is the auth betwen main and node
 
     return response
 }
@@ -62,10 +74,14 @@ async function insertFlower(name, region, color) {
     const response = await Flower.create({ name: name, region: region, color: color })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log("flowersQuerys- insertFlower", response)
 =======
     //console.log(response)
 >>>>>>> almost finished
+=======
+    console.log("flowersQuerys- insertFlower", response)
+>>>>>>> the next todo is the auth betwen main and node
 
     return response
 }
