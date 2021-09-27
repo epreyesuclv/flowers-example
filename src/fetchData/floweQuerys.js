@@ -25,7 +25,6 @@ async function getVendors(flowerName) {
             flowerName: flowerName
         }
     }).catch(handlercatch)
-
     console.log("flowersQuerys-getVendors", flowerName)
     let vendors = []
 
