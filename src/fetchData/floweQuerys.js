@@ -25,106 +25,110 @@ async function getVendors(flowerName) {
             flowerName: flowerName
         }
     }).catch(handlercatch)
+
     console.log("flowersQuerys-getVendors", flowerName)
     let vendors = []
 
     for (let vendor of response) {
         vendors.push(await UserBack.findByPk(vendor.ownerName))
+      
+    }
+        return vendors
     }
 
-    return vendors
-}
+    async function getAllVendor() {
 
-async function getAllVendor() {
-
-    const response = await UserBack.findAll()
-
-    //console.log("flowersQuerys ",response)
-
-    return response
-}
+        const response = await UserBack.findAll()
 
 
-async function insertFlower(name, region, color) {
-
-    //write your query insert here
-    const response = await Flower.create({ name: name, region: region, color: color })
-
-    console.log("flowersQuerys- insertFlower", response)
-
-    return response
-}
+        //console.log("flowersQuerys ",response)
 
 
+        return response
+    }
 
-//insert new one vendor's Flower
 
-async function insertFlowerOnwer(name, owner) {
+    async function insertFlower(name, region, color) {
 
-    const response = await FlowerOwner.create({ flowerName: name, ownerName: owner })
+        //write your query insert here
+        const response = await Flower.create({ name: name, region: region, color: color })
 
-    return response
-}
+
+        console.log("flowersQuerys- insertFlower", response)
+
+        return response
+    }
 
 
 
-async function selectFlowerOwner(id, email) {
+    //insert new one vendor's Flower
 
-    //write your query select here
-    const response = await FlowerOwner.findAll({
-        where: {
-            flowerName: id,
-            ownerName: email
-        }
-    })
-    return response
-}
+    async function insertFlowerOnwer(name, owner) {
+
+        const response = await FlowerOwner.create({ flowerName: name, ownerName: owner })
+
+        return response
+    }
 
 
 
-//delete a one vendor's Flower
+    async function selectFlowerOwner(id, email) {
 
-async function deleteFlower(idFlower, owner) {
-    //write your query delete here
-    await FlowerOwner.destroy({
-        where: {
-            flowerName: idFlower,
-            ownerName: owner
-        }
-    })
-    return response
-}
-
-
-
-async function getAllflowers() {
-
-    return await Flower.findAll().catch(handlercatch)
-
-    //need fix
-}
+        //write your query select here
+        const response = await FlowerOwner.findAll({
+            where: {
+                flowerName: id,
+                ownerName: email
+            }
+        })
+        return response
+    }
 
 
 
-async function selectflower(id) {
+    //delete a one vendor's Flower
 
-    return await Flower.findByPk(id).catch(handlercatch)
+    async function deleteFlower(idFlower, owner) {
+        //write your query delete here
+        await FlowerOwner.destroy({
+            where: {
+                flowerName: idFlower,
+                ownerName: owner
+            }
+        })
+        return response
+    }
 
-}
+
+
+    async function getAllflowers() {
+
+        return await Flower.findAll().catch(handlercatch)
+
+        //need fix
+    }
 
 
 
-function handlercatch(err) {
-    console.log("flowersQuerys - handlercatch ", err)
-}
+    async function selectflower(id) {
 
-module.exports = {
-    deleteFlower,
-    getAllVendor,
-    getVendors,
-    selectFlowerOwner,
-    insertFlower,
-    insertFlowerOnwer,
-    selectflower,
-    getAllflowers
-}
+        return await Flower.findByPk(id).catch(handlercatch)
+
+    }
+
+
+
+    function handlercatch(err) {
+        console.log("flowersQuerys - handlercatch ", err)
+    }
+
+    module.exports = {
+        deleteFlower,
+        getAllVendor,
+        getVendors,
+        selectFlowerOwner,
+        insertFlower,
+        insertFlowerOnwer,
+        selectflower,
+        getAllflowers
+    }

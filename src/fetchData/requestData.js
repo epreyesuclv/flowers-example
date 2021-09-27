@@ -10,7 +10,6 @@ async function buyFlowerNode(name, amount, address) {
 
     axios.defaults.timeout = 3000
     console.log("requestData-buyFlower ", vendors)
-
     for (let v of vendors) {
         if (sell_it)
             break;
@@ -50,7 +49,9 @@ async function fetchFromAllNodes() {
     const vendors = await getAllVendor()
     console.log("requestData - fetchFromAllNodes",vendors)
     for (let v of vendors) {
-        //console.log("requestData - fetchFromAllNodes",v)
+
+
+        console.log("requestData - fetchFromAllNodes",v)
         const endPoint = v.endPoint
 
         const options = {
@@ -63,9 +64,10 @@ async function fetchFromAllNodes() {
         await axios.request(options).then(async function (response) {
             status = response.status
             data = response.data
+
             console.log("requestData - fetchFromAllNodes - axios request response",data)
             await cleanInsertAll(data, v.email)
-          
+              
         }).catch(function (error) {
             data = error
             //console.log("token ",error.response)
