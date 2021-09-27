@@ -15,6 +15,7 @@ function verifyingToken(req, res, next) {
     } catch (err) {
         return res.status(401).send("Invalid Token, is posible that your token is outdate, please login again")
     }
+    //console.log("authToken " , req.user)
     next()
 }
 

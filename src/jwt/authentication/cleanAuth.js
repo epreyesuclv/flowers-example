@@ -21,14 +21,14 @@ async function cleanLogin(email, password, busy) {
     //veryfying if the user already exist
 
     const user = await func(email)
-    //console.log(user)
+    console.log("clean auth ", user)
     if (user === undefined)
         throw new IncorrectCredentials
 
     //console.log(user)
     if (user && (await bcrypt.compare(password, user.pass))) {
-
-        token = getToken(user, email)
+        console.log("cleanAuth - cleanLogin",email)
+        const token = getToken( email)
 
         user.token = token
         //console.log("in cleanAuth",user)
@@ -50,34 +50,34 @@ async function cleanRegister(firstName, lastName, email, password, busy, endPoin
         // res.status(400).send("All input is required")
         throw new InputRequire
 
+    console.log("cleanAuth-cleanRegister ",busy)
     const func = (busy == "back") ? findOneBack : findOneFront
 
     //veryfying if the user already exist
 
     const oldUser = await func(email)
-    // console.log(oldUser)
+    //console.log("cleanAuth", oldUser?.toJSON() ?? "null")
 
     if (oldUser)
         //return res.status(409).send("user aready exist")
         throw new DuplicateEmail
 
     //encypting the pass
-    encryptedPass = await bcrypt.hash(password, 11)
+    const encryptedPass = await bcrypt.hash(password, 11)
 
     //creating token
     const token = getToken(email)
 
     //creating the user
-    await create({
+    const user = await create({
         firstName: firstName,
         lastName: lastName,
         email: email.toLowerCase(),
         pass: encryptedPass,
-        endoPoint: endPoint
+        endPoint: endPoint
     }
     )
 
-    const user = await func(email)
     user.token = token
 
     return user
@@ -86,16 +86,16 @@ async function cleanRegister(firstName, lastName, email, password, busy, endPoin
 
 
 function getToken(email) {
-
+    console.log("cleanAuth-getToken",email)
     const token = jwt.sign(
         {
             user_id: email
         },
         process.env.TOKEN_KEY,
         {
-            expiresIn: "2h"
+            expiresIn: "10h"
         }
-    )
+    );
     return token
 
 }

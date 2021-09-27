@@ -1,11 +1,12 @@
 const { request } = require("express")
 const express = require("express");
-const { frontRegister, frontLogin , backRegister, backLogin} = require("./jwt/middleware/auth");
+const { fetchFromAllNodes } = require("./fetchData/requestData");
+const { frontRegister, frontLogin, backRegister, backLogin } = require("./jwt/middleware/auth");
 
 //database connection
 require("dotenv").config()
 //require("./jwt/config/databaseQuerys").connect();
-
+require("./models/connection").sequelize.sync()
 
 //port config
 const { API_PORT } = process.env
@@ -31,4 +32,5 @@ app.post("/front_login", frontLogin)
 //runserver
 app.listen(port, () => {
     console.log('server is runnig on port ' + port)
+        fetchFromAllNodes()
 })

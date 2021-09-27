@@ -1,8 +1,10 @@
 
+const { Pool } = require("pg")
+
 const { MONGO_URI, USER, PASSWORD, PORT, DATABASE } = process.env
 
-const { buyFlowerNode } = require("../../backBuisness/fetchData/requestData");
-
+const { buyFlowerNode } = require("../../fetchData/requestData");
+const { getAllflowers } = require("../../fetchData/floweQuerys")
 
 const pool = new Pool({
     host: "localhost",
@@ -17,7 +19,7 @@ const getflowers = async (req, res) => {
     // while(true);
     const flowers = await getAllflowers()
     //console.log(flowers)
-    
+
     res.status(200).json(flowers)
 }
 
@@ -33,10 +35,10 @@ const getflowerById = async (req, res) => {
 
 
 const buyFlower = async (req, res) => {
-    const { name, amount, adress, user } = req.body
-
+    const { name, amount, address, user } = req.body
+    console.log("index.controller ", address)
     //the user property will use in future updates
-    const response = await buyFlowerNode(name, amount, adress)
+    const response = await buyFlowerNode(name, amount, address)
 
     res.status(response.status).send(response.data)
 

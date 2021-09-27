@@ -14,6 +14,7 @@ async function register(req, res) {
         endPoint
     } = req.body
 
+    console.log("auth-register",endPoint)
 
     try {
 
@@ -41,9 +42,9 @@ async function register(req, res) {
 
 async function login(req, res) {
     try {
-        const { email, password } = req.body
+        const { email, password, busy } = req.body
 
-        const user = await cleanLogin(email, password)
+        const user = await cleanLogin(email, password,busy)
         return res.status(200).json(user)
     } catch (err) {
 

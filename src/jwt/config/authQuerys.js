@@ -10,7 +10,7 @@ async function create(data) {
     else
         response = await UserFront.create(data).catch(handlercatch)
 
-    return response.toJSON()
+    return response?.toJSON() ?? "ya existe este usuario"
 
 }
 
@@ -18,20 +18,20 @@ async function create(data) {
 async function findOneBack(email) {
 
     const response = await UserBack.findByPk(email).catch(handlercatch)
-
+    console.log("user finded succeful")
     return response
 }
 
 async function findOneFront(email) {
 
-    const response = await UserBack.findByPk(email).catch(handlercatch)
-
+    const response = await UserFront.findByPk(email).catch(handlercatch)
+    //console.log("authQuerys ",response.toJSON())
     return response
 
 }
 
 function handlercatch(err) {
-    console.log("authquerys-handlercatcher")
+    console.log("authquerys-handlercatcher",err)
 }
 
 module.exports = {

@@ -25,11 +25,19 @@ async function getVendors(flowerName) {
             flowerName: flowerName
         }
     }).catch(handlercatch)
+<<<<<<< HEAD
     console.log("flowersQuerys-getVendors", flowerName)
     let vendors = []
 
     for (let vendor of response) {
         vendors.push(await UserBack.findByPk(vendor.ownerName))
+=======
+console.log(response)
+    let vendors = []
+
+    for (vendor in response) {
+        vendors.push(await FlowerOwner.findByPk(vendor))
+>>>>>>> almost finished
     }
 
     return vendors
@@ -38,7 +46,11 @@ async function getVendors(flowerName) {
 async function getAllVendor() {
 
     const response = await UserBack.findAll()
+<<<<<<< HEAD
     //console.log("flowersQuerys ",response)
+=======
+        //console.log("flowersQuerys ",response)
+>>>>>>> almost finished
 
     return response
 }
@@ -49,7 +61,11 @@ async function insertFlower(name, region, color) {
     //write your query insert here
     const response = await Flower.create({ name: name, region: region, color: color })
 
+<<<<<<< HEAD
     console.log("flowersQuerys- insertFlower", response)
+=======
+    //console.log(response)
+>>>>>>> almost finished
 
     return response
 }

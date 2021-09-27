@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize/types");
+const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("./connection");
 const { Flower } = require("./flowers");
 const { UserBack } = require("./userBack");
@@ -23,7 +23,7 @@ FlowerOwner.init({
         }
     },
     amount: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         defaultValue : 10000
     }
 }, {

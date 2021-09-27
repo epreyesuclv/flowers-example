@@ -1,14 +1,15 @@
-const { Model, DataTypes } = require("sequelize/types");
+const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("./connection")
 
 
 class UserFront extends Model { }
 
 UserFront.init({
-    firstname: {
+    firstName: {
+    
         type: DataTypes.STRING
     },
-    lastname: {
+    lastName: {
         type: DataTypes.STRING
     },
     email: {
