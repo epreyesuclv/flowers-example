@@ -10,6 +10,7 @@ async function buyFlowerNode(name, amount, address) {
 
     axios.defaults.timeout = 3000
     console.log("requestData-buyFlower ", vendors)
+
     for (let v of vendors) {
         if (sell_it)
             break;
@@ -19,6 +20,7 @@ async function buyFlowerNode(name, amount, address) {
             method: 'POST',
             url: `${v.endPoint}buy`,
             headers: { 'Content-Type': 'application/json' },
+
             data: { name: name, amount: amount, address: address }
         };
         axios.defaults.timeout = 3000

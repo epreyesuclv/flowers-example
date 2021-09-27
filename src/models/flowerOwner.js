@@ -1,8 +1,6 @@
-<<<<<<< HEAD
+
 const { Model, DataTypes } = require("sequelize");
-=======
-const { Model, DataTypes } = require("sequelize/types");
->>>>>>> end users querys and flowers querys
+
 const { sequelize } = require("./connection");
 const { Flower } = require("./flowers");
 const { UserBack } = require("./userBack");
@@ -27,11 +25,7 @@ FlowerOwner.init({
         }
     },
     amount: {
-<<<<<<< HEAD
         type: DataTypes.INTEGER,
-=======
-        type: DataTypes.NUMBER,
->>>>>>> end users querys and flowers querys
         defaultValue : 10000
     }
 }, {

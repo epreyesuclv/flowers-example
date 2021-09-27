@@ -38,7 +38,9 @@ async function getVendors(flowerName) {
 async function getAllVendor() {
 
     const response = await UserBack.findAll()
+
     //console.log("flowersQuerys ",response)
+
     return response
 }
 

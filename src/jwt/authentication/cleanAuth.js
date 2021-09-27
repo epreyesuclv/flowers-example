@@ -21,11 +21,10 @@ async function cleanLogin(email, password, busy) {
     //veryfying if the user already exist
 
     const user = await func(email)
-<<<<<<< HEAD
+
     console.log("clean auth ", user)
-=======
-    //console.log(user)
->>>>>>> end users querys and flowers querys
+
+
     if (user === undefined)
         throw new IncorrectCredentials
 
@@ -73,20 +72,18 @@ async function cleanRegister(firstName, lastName, email, password, busy, endPoin
     const token = getToken(email)
 
     //creating the user
-<<<<<<< HEAD
+
     const user = await create({
-=======
-    await create({
->>>>>>> end users querys and flowers querys
+
+ 
+
         firstName: firstName,
         lastName: lastName,
         email: email.toLowerCase(),
-        pass: encryptedPass,
-<<<<<<< HEAD
+        password: encryptedPass,
+
         endPoint: endPoint
-=======
-        endoPoint: endPoint
->>>>>>> end users querys and flowers querys
+
     }
     )
 

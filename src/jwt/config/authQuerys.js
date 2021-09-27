@@ -10,45 +10,30 @@ async function create(data) {
     else
         response = await UserFront.create(data).catch(handlercatch)
 
-<<<<<<< HEAD
-    return response?.toJSON() ?? "ya existe este usuario"
-=======
-    return response.toJSON()
->>>>>>> end users querys and flowers querys
 
+    return response?.toJSON() ?? "ya existe este usuario"
 }
 
 
 async function findOneBack(email) {
 
     const response = await UserBack.findByPk(email).catch(handlercatch)
-<<<<<<< HEAD
-    console.log("user finded succeful")
-=======
 
->>>>>>> end users querys and flowers querys
+    console.log("user finded succeful")
     return response
 }
 
 async function findOneFront(email) {
 
-<<<<<<< HEAD
-    const response = await UserFront.findByPk(email).catch(handlercatch)
-    //console.log("authQuerys ",response.toJSON())
-=======
-    const response = await UserBack.findByPk(email).catch(handlercatch)
 
->>>>>>> end users querys and flowers querys
+    const response = await UserFront.findByPk(email).catch(handlercatch)
     return response
 
 }
 
 function handlercatch(err) {
-<<<<<<< HEAD
+
     console.log("authquerys-handlercatcher",err)
-=======
-    console.log("authquerys-handlercatcher")
->>>>>>> end users querys and flowers querys
 }
 
 module.exports = {

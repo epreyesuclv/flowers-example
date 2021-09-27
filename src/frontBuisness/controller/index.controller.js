@@ -19,7 +19,7 @@ const getflowers = async (req, res) => {
     // while(true);
     const flowers = await getAllflowers()
     //console.log(flowers)
-    
+
     res.status(200).json(flowers)
 }
 
