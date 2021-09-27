@@ -50,9 +50,6 @@ async function insertFlower(name, region, color) {
 
     console.log("flowersQuerys- insertFlower", response)
 
-    //console.log(response)
-
-    console.log("flowersQuerys- insertFlower", response)
     return response
 }
 

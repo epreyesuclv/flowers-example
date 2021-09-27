@@ -19,8 +19,7 @@ async function buyFlowerNode(name, amount, address) {
             method: 'POST',
             url: `${v.endPoint}buy`,
             headers: { 'Content-Type': 'application/json' },
-            data: { name: name, amount: amount, address: address, token:"sjadfhjkqshf" }
-
+            data: { name: name, amount: amount, address: address }
         };
         axios.defaults.timeout = 3000
         await axios.request(options).then(function (response) {
@@ -31,7 +30,6 @@ async function buyFlowerNode(name, amount, address) {
         }).catch(function (error) {
             data = error
                         //console.log("token ",error.response)
-
         });
     }
 
@@ -39,7 +37,6 @@ async function buyFlowerNode(name, amount, address) {
     if (!sell_it)
         status = 408
     console.log("requestData - buyFlower ",data)
-
     return {
         status: status,
         data: data
@@ -64,9 +61,9 @@ async function fetchFromAllNodes() {
         await axios.request(options).then(async function (response) {
             status = response.status
             data = response.data
-
             console.log("requestData - fetchFromAllNodes - axios request response",data)
             await cleanInsertAll(data, v.email)
+          
         }).catch(function (error) {
             data = error
             //console.log("token ",error.response)
