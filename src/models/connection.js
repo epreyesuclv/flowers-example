@@ -1,14 +1,10 @@
-const { Sequelize} = require("sequelize")
+const { Sequelize } = require("sequelize")
 
 require("dotenv").config()
-const { USER, PASSWORD, PORT, DATABASE ,HOST} = process.env
+const {  DBURI } = process.env
 
 
-const sequelize = new Sequelize(DATABASE, USER, PASSWORD, {
-
-    host: HOST,
-    dialect: 'postgres'
-});
+const sequelize = new Sequelize(DBURI)
 
 
 module.exports = {
