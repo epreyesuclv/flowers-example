@@ -1,5 +1,7 @@
+const { Sequelize} = require("sequelize")
 
-const { MONGO_URI, USER, PASSWORD, PORT, DATABASE } = process.env
+require("dotenv").config()
+const { USER, PASSWORD, PORT, DATABASE } = process.env
 
 
 const sequelize = new Sequelize(DATABASE, USER, PASSWORD, {

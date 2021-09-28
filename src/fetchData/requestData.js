@@ -14,18 +14,13 @@ async function buyFlowerNode(name, amount, address) {
         if (sell_it)
             break;
         //I supose that all vendors, have enough flower to sell,this features will change in the future
-        console.log("requestData - inside for", v.endPoint)
+        //console.log("requestData - inside for", v.endPoint)
         const options = {
             method: 'POST',
             url: `${v.endPoint}buy`,
             headers: { 'Content-Type': 'application/json' },
-<<<<<<< HEAD
 
             data: { name: name, amount: amount, address: address }
-=======
-            data: { name: name, amount: amount, address: address, token:"sjadfhjkqshf" }
-
->>>>>>> conficlt resolves
         };
         axios.defaults.timeout = 3000
         await axios.request(options).then(function (response) {
@@ -36,21 +31,13 @@ async function buyFlowerNode(name, amount, address) {
         }).catch(function (error) {
             data = error
                         //console.log("token ",error.response)
-<<<<<<< HEAD
-=======
-
->>>>>>> conficlt resolves
         });
     }
 
 
     if (!sell_it)
         status = 408
-    console.log("requestData - buyFlower ",data)
-<<<<<<< HEAD
-=======
-
->>>>>>> conficlt resolves
+    //console.log("requestData - buyFlower ",data)
     return {
         status: status,
         data: data
@@ -60,15 +47,11 @@ async function buyFlowerNode(name, amount, address) {
 async function fetchFromAllNodes() {
 
     const vendors = await getAllVendor()
-    console.log("requestData - fetchFromAllNodes",vendors)
+    //console.log("requestData - fetchFromAllNodes",vendors)
     for (let v of vendors) {
-<<<<<<< HEAD
 
 
-        console.log("requestData - fetchFromAllNodes",v)
-=======
         //console.log("requestData - fetchFromAllNodes",v)
->>>>>>> conficlt resolves
         const endPoint = v.endPoint
 
         const options = {
@@ -82,20 +65,17 @@ async function fetchFromAllNodes() {
             status = response.status
             data = response.data
 
-            console.log("requestData - fetchFromAllNodes - axios request response",data)
+            //console.log("requestData - fetchFromAllNodes - axios request response",data)
             await cleanInsertAll(data, v.email)
-<<<<<<< HEAD
               
-=======
->>>>>>> conficlt resolves
         }).catch(function (error) {
             data = error
             //console.log("token ",error.response)
         });
 
-        console.log("requestData-fetchFromAllNodes", data)
+        //console.log("requestData-fetchFromAllNodes", data)
     }
-
+return fetchFromAllNodes()
 
 }
 
