@@ -1,0 +1,10 @@
+{
+    "name": "Start on Heroku: Node.js",
+    "description": "This is my testing deployment",
+    "repository": "https://github.com/epreyesuclv/testingNodeExpres",
+    "keywords": [
+        "node",
+        "express",
+        "heroku"
+    ]
+}
