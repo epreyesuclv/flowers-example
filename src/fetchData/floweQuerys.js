@@ -1,7 +1,7 @@
 const { Pool } = require("pg")
-const { Flower } = require("../models/Flowers")
+const { Flower } = require("../models/flowers")
 
-const { FlowerOwner } = require("../models/FlowerOwner")
+const { FlowerOwner } = require("../models/flowerOwner")
 const { UserBack } = require("../models/userBack")
 require("dotenv").config
 const { DATABASE, PASSWORD, USER, PORT } = process.env
