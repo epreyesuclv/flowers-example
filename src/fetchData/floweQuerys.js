@@ -12,7 +12,8 @@ const pool = new Pool({
     user: USER,
     password: PASSWORD,
     port: PORT,
-    database: DATABASE
+    database: DATABASE,
+    ssl: true
 })
 
 
