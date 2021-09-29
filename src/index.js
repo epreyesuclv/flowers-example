@@ -9,8 +9,8 @@ require("dotenv").config()
 require("./models/connection").sequelize.sync()
 
 //port config
-const { API_PORT } = process.env
-const port = API_PORT || 4001
+
+var port = process.env.PORT || 4000
 
 
 //server
