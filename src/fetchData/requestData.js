@@ -2,11 +2,11 @@ const { default: axios } = require("axios");
 const { getAllVendor, getVendors } = require("./floweQuerys")
 const { cleanInsertAll } = require("./cleanOperations")
 async function buyFlowerNode(name, amount, address) {
-    fetchFromAllNodes()
     const vendors = await getVendors(name)
     let sell_it = false
     let data
     let status
+    let  err
 
     axios.defaults.timeout = 3000
     console.log("requestData-buyFlower ", vendors)
@@ -14,7 +14,7 @@ async function buyFlowerNode(name, amount, address) {
         if (sell_it)
             break;
         //I supose that all vendors, have enough flower to sell,this features will change in the future
-        //console.log("requestData - inside for", v.endPoint)
+        console.log("requestData - inside for", v.endPoint)
         const options = {
             method: 'POST',
             url: `${v.endPoint}buy`,
@@ -29,19 +29,20 @@ async function buyFlowerNode(name, amount, address) {
             sell_it = true
             //console.log(response)
         }).catch(function (error) {
-            data = error
-                        //console.log("token ",error.response)
+            err = error
+            //console.log("token ",error.response)
         });
     }
 
 
-    if (!sell_it)
-        status = 408
-    //console.log("requestData - buyFlower ",data)
+    if (!sell_it) {
+        status = 409
+        data = "sorry your flower does exist"
+    }    //console.log("requestData - buyFlower ",data)
     return {
         status: status,
-        data: "sorry your flower does exist",
-        err:data
+        data: data,
+        err: err
     }
 }
 
@@ -68,7 +69,7 @@ async function fetchFromAllNodes() {
 
             //console.log("requestData - fetchFromAllNodes - axios request response",data)
             await cleanInsertAll(data, v.email)
-              
+
         }).catch(function (error) {
             data = error
             //console.log("token ",error.response)
