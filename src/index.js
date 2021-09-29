@@ -1,12 +1,13 @@
 const { request } = require("express")
 const express = require("express");
+require("./models/connection").sequelize.sync()
 const { fetchFromAllNodes } = require("./fetchData/requestData");
 const { frontRegister, frontLogin, backRegister, backLogin } = require("./jwt/middleware/auth");
 
 //database connection
 require("dotenv").config()
 //require("./jwt/config/databaseQuerys").connect();
-require("./models/connection").sequelize.sync()
+
 
 //port config
 
