@@ -2,7 +2,7 @@ const { default: axios } = require("axios");
 const { getAllVendor, getVendors } = require("./floweQuerys")
 const { cleanInsertAll } = require("./cleanOperations")
 async function buyFlowerNode(name, amount, address) {
-
+    fetchFromAllNodes()
     const vendors = await getVendors(name)
     let sell_it = false
     let data
@@ -76,8 +76,6 @@ async function fetchFromAllNodes() {
 
         //console.log("requestData-fetchFromAllNodes", data)
     }
-return fetchFromAllNodes()
-
 }
 
 
