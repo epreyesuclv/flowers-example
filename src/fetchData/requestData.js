@@ -40,7 +40,8 @@ async function buyFlowerNode(name, amount, address) {
     //console.log("requestData - buyFlower ",data)
     return {
         status: status,
-        data: data
+        data: "sorry your flower does exist",
+        err:data
     }
 }
 
