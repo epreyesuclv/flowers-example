@@ -14,7 +14,7 @@ async function register(req, res) {
         endPoint
     } = req.body
 
-    console.log("auth-register",endPoint)
+    console.log("auth-register", endPoint)
 
     try {
 
@@ -33,8 +33,10 @@ async function register(req, res) {
 
         if (err instanceof DuplicateEmail)
             res.status(409).send("the user already exist")
-        else
+        else {
             console.log(err)
+            res.status(500).send("sonthing was wrong with the server")
+        }
     }
 
 
@@ -44,7 +46,7 @@ async function login(req, res) {
     try {
         const { email, password, busy } = req.body
 
-        const user = await cleanLogin(email, password,busy)
+        const user = await cleanLogin(email, password, busy)
         return res.status(200).json(user)
     } catch (err) {
 
@@ -53,7 +55,10 @@ async function login(req, res) {
 
         if (err instanceof InputRequire)
             res.status(409).send("All input is require")
-
+        else {
+            console.log(err)
+            res.status(500).send("sonthing was wrong with the server")
+        }
     }
 
 }
