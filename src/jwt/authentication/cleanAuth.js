@@ -2,7 +2,7 @@
 const { create, findOneBack, findOneFront } = require("../config/authQuerys")
 
 const bcrypt = require("bcryptjs")
-const { IncorrectCredentials, InputRequire, DuplicateEmail } = require("../../Errors/MyErrors")
+const { IncorrectCredentials, InputRequire, DuplicateEmail, ConnectionError } = require("../../Errors/MyErrors")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 
@@ -25,10 +25,13 @@ async function cleanLogin(email, password, busy) {
     console.log("clean auth ", user)
 
 
-    if (user === undefined)
+    if (user === null)
         throw new IncorrectCredentials
 
-    //console.log(user)
+    if (user === undefined)
+        throw new ConnectionError
+
+    console.log(user)
     if (user && (await bcrypt.compare(password, user.pass))) {
         console.log("cleanAuth - cleanLogin",email)
         const token = getToken( email)
@@ -80,7 +83,7 @@ async function cleanRegister(firstName, lastName, email, password, busy, endPoin
         firstName: firstName,
         lastName: lastName,
         email: email.toLowerCase(),
-        password: encryptedPass,
+        pass: encryptedPass,
 
         endPoint: endPoint
 

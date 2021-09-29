@@ -11,7 +11,7 @@ async function create(data) {
         response = await UserFront.create(data).catch(handlercatch)
 
 
-    return response?.toJSON() ?? "ya existe este usuario"
+    return response?.toJSON() ?? "Cant connect to the databse"
 }
 
 

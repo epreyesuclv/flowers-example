@@ -1,5 +1,5 @@
 
-const { InputRequire, IncorrectCredentials, DuplicateEmail } = require("../../Errors/MyErrors")
+const { InputRequire, IncorrectCredentials, DuplicateEmail, ConnectionError } = require("../../Errors/MyErrors")
 const { cleanLogin, cleanRegister } = require("../authentication/cleanAuth")
 
 
@@ -29,13 +29,13 @@ async function register(req, res) {
             res.status(401).send("somthing was wrong with your credentials")
 
         if (err instanceof InputRequire)
-            res.status(402).send("all input is require")
+            res.status(403).send("all input is require")
 
         if (err instanceof DuplicateEmail)
             res.status(409).send("the user already exist")
         else {
             console.log(err)
-            res.status(500).send("sonthing was wrong with the server")
+            res.status(503).send("sonthing was wrong with the server")
         }
     }
 
@@ -54,10 +54,14 @@ async function login(req, res) {
             res.status(401).send("Incorrect creedentials")
 
         if (err instanceof InputRequire)
-            res.status(409).send("All input is require")
+            res.status(403).send("All input is require")
+            
+        if (err instanceof ConnectionError)
+            //504
+            res.status(504).send("We sorry your request cant be procces in this moment")
         else {
             console.log(err)
-            res.status(500).send("sonthing was wrong with the server")
+            res.status(503).send("sonthing was wrong with the server")
         }
     }
 

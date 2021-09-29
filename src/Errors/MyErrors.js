@@ -13,9 +13,14 @@ class IncorrectCredentials extends Error{
         super()
     }
 }
-
+class ConnectionError extends Error{
+    constructor(){
+        super()
+    }
+}
 module.exports = {
     InputRequire,
     DuplicateEmail,
-    IncorrectCredentials
+    IncorrectCredentials,
+    ConnectionError
 }
