@@ -4,7 +4,7 @@ const { create, findOneBack, findOneFront } = require("../config/authQuerys")
 const bcrypt = require("bcryptjs")
 const { IncorrectCredentials, InputRequire, DuplicateEmail } = require("../../Errors/MyErrors")
 const jwt = require("jsonwebtoken")
-
+require("dotenv").config()
 
 
 //throw: InputRequireError , IncorrectCredentialError

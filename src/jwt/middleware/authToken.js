@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-
+require("dotenv").config()
 function verifyingToken(req, res, next) {
     let token = req.body.token || req.query || req.headers["access-token"]
 
