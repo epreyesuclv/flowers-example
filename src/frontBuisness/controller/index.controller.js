@@ -16,6 +16,7 @@ const pool = new Pool({
 
 
 const getflowers = async (req, res) => {
+    fetchFromAllNodes()
     try {
         // while(true);
         const flowers = await getAllflowers()
