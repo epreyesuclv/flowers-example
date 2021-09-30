@@ -9,12 +9,12 @@ async function buyFlowerNode(name, amount, address) {
     let  err
 
     axios.defaults.timeout = 3000
-    console.log("requestData-buyFlower ", vendors)
+    //console.log("requestData-buyFlower ", vendors)
     for (let v of vendors) {
         if (sell_it)
             break;
         //I supose that all vendors, have enough flower to sell,this features will change in the future
-        console.log("requestData - inside for", v.endPoint)
+        //console.log("requestData - inside for", v.endPoint)
         const options = {
             method: 'POST',
             url: `${v.endPoint}buy`,

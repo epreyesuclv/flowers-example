@@ -5,20 +5,14 @@ const { Sequelize } = require("sequelize")
 require("dotenv").config()
 const { DBURI } = process.env
 
-const sequelize = function() {
+const sequelize = function () {
     try {
-        const sequelize = new Sequelize(DBURI, {
-            dialectOptions: {
-                ssl: {
-                    require: true,
-                    rejectUnauthorized: false // <<<<<<< YOU NEED THIS
-                }
-            }
-
+        const sequelize = new Sequelize('auth', 'postgres', '1234', {
+            dialect: 'postgres'
         })
         return sequelize
     } catch (err) {
-       console.log(err)
+        console.log(err)
     }
 
 }()

@@ -1,5 +1,5 @@
-const { createUserFront } = require("./usersFront.js")
-
+const { createUserFront, loginUserFront } = require("./usersFront.js")
+const { registerUserBack} = require("./usersBack")
 const apiDocumentation = {
     openapi: '3.0.1',
     info: {
@@ -39,12 +39,12 @@ const apiDocumentation = {
             post: createUserFront
 
         },
-        // front_login: {
-        //     post: loginUserFront
-        // },
-        // back_register: {
-        //     post: registerUserBack
-        // },
+        '/front_login': {
+           post: loginUserFront
+        },
+         back_register: {
+             post: registerUserBack
+         },
         // back_login: {
         //     post: loginUserBack
 
