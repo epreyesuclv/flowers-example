@@ -23,7 +23,7 @@ const getflowers = async (req, res) => {
         //console.log(flowers)
         res.status(200).json(flowers)
     } catch (err) {
-        res.status(500).send("somthing was wrong with the server see log")
+        res.status(503).send("somthing was wrong with the server see log")
     }
 
 }
@@ -37,7 +37,7 @@ const getflowerById = async (req, res) => {
         //console.log(arr)
         res.status(200).json(arr)
     } catch (err) {
-        res.status(500).send("somthing was wrong with the server see log")
+        res.status(503).send("somthing was wrong with the server see log")
     }
 
 }
@@ -52,7 +52,7 @@ const buyFlower = async (req, res) => {
 
         res.status(response.status).send(response.data)
     } catch (err) {
-        res.status(500).send("somthing was wrong with the server see log")
+        res.status(503).send("somthing was wrong with the server see log")
     }
 
 }

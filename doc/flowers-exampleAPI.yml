@@ -1,0 +1,128 @@
+openapi: 3.0.0
+info:
+  title: flowers-exampleAPI
+  version: '1.0.0'
+servers:
+  - url: https://localhost:4000
+paths:
+  /flowers:
+    get:
+      responses:
+        '200':
+          description: 'it fetch all flowers from all nodes, and expose in json format'
+        '503':
+          description: 
+            'I simply include this for testing , but is probable that was an error in my code,
+              I apologize'
+ 
+  /flowers/:name :
+      get:
+        responses:
+          '200': 
+            description:
+              'it returns the properties from exactly the flowers you pass in the
+              parametes, it will match with the ''name'' property'
+          '503':
+            description: 
+              'I simply include this for testing , but is probable that was an error in my code,
+              I apologize'
+
+  /buy : 
+    post:
+      responses:
+        '200':
+          description: 
+            'if the transaction was done successfully, and the flowers is on way'
+            
+        '503':
+          description: 
+            'I simply include this for testing , but is probable that was an error in my code,
+              I apologize'
+
+      
+
+  /front_register:
+    post:
+      responses:
+        '200':
+          description: 
+            'is for the frontend 
+          app that wants to sells flowers 
+          , they can register, for use /buy. It returns, the users property in
+          json format,you may storage the token :> '
+        '401': 
+          description:
+            'it is caused when cast parameters, please use only string format in all fields required'
+        '403':
+          description: 
+            'you need to include all parameter in the body , as json format'
+        '409':
+          description: 
+            'the user that you want to use aready exist in the server'
+        '503':
+          description: 
+            'I simply include this for testing , but is probable that was an error in my code,
+              I apologize'
+  /front_login :
+    post:
+      responses:
+        '200':
+          description: 
+            'it returns the token for your user,you may use in the /buy endpoint'
+        '401': 
+          description:
+            'you need to send corrent credentils, if you dont have an account yet 
+            please register in /front_register'
+        '403':
+          description: 
+            'you need to include all parameter in the body , as json format'
+        '504':
+          description: 
+            'it is usually cause when the database is disconnected'
+        '503':
+          description: 
+            'I simply include this for testing , but is probable that was an error in my code,
+              I apologize'
+
+  /back_register:
+    post:
+      responses:
+        '200':
+          description: 
+            'is for the node server 
+          app that wants to sells flowers 
+          , they can register , and this server fetch in his API . It returns, the users property in
+          json format '
+        '401': 
+          description:
+            'it is caused when cast parameters, please use only string format in all fields required'
+        '403':
+          description: 
+            'you need to include all parameter in the body , as json format'
+        '409':
+          description: 
+            'the user that you want to use aready exist in the server'
+        '503':
+          description: 
+            'I simply include this for testing , but is probable that was an error in my code,
+              I apologize'
+  /back_login :
+    post:
+      responses:
+        '200':
+          description: 
+            'it returns a token but, it really means nothing I include for future versions'
+        '401': 
+          description:
+            'you need to send corrent credentils, if you dont have an account yet 
+            please register in /back_register'
+        '403':
+          description: 
+            'you need to include all parameter in the body , as json format'
+        '504':
+          description: 
+            'it is usually cause when the database is disconnected'
+        '503':
+          description: 
+            'I simply include this for testing , but is probable that was an error in my code,
+              I apologize'

@@ -58,7 +58,7 @@ async function login(req, res) {
             
         if (err instanceof ConnectionError)
             //504
-            res.status(504).send("We sorry your request cant be procces in this moment")
+            res.status(504).send("We sorry, your request cant be procces in this moment")
         else {
             console.log(err)
             res.status(503).send("sonthing was wrong with the server")
