@@ -32,8 +32,8 @@ const getflowers = async (req, res) => {
 
 const getflowerById = async (req, res) => {
     try {
-        id = req.params.name
-        arr = await selectflower(id)
+        const id = req.params.name || ""
+        const arr = await selectflower(id)
         //console.log(arr)
         res.status(200).json(arr)
     } catch (err) {
