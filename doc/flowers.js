@@ -5,7 +5,7 @@ const getAllFlowers = {
 
     responses: {
         '200': {
-            description: 'Here are your flowers !, it will return an empty array if does have any flower',
+            description: 'Here are your flowers !.Returns an array with the properties below, it will return an empty array if does have any flower',
             content: {
                 'application/json': {
                     schema: {
