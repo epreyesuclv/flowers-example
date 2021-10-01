@@ -6,7 +6,7 @@ const apiDocumentation = {
     info: {
         version: '1.3.0',
         title: 'Flower-exampleAPI',
-        description: 'This api is just for testing microservice purpose, nothing really happens if you use /buy enpoint, it just fetch the existent data in all other nodes',
+        description: 'This api is just for testing microservice purpose, nothing really happens if you use /buy enpoint, it just fetch the existent data in all other nodes.I will add features in the future,I hope some day this project become reality',
         contact: {
             name: 'Starcout',
             email: 'epreyesuclv@gmail.com',
@@ -22,7 +22,7 @@ const apiDocumentation = {
             description: 'Local Server',
         },
         {
-            url: 'https://flowres-example.herokuapp.com',
+            url: 'https://flowres-example.herokuapp.com/',
             description: 'Production Server',
         },
     ],
@@ -49,7 +49,7 @@ const apiDocumentation = {
         '/flowers': {
             get: getAllFlowers
         },
-        '/flowers:id': {
+        '/flowers/{id}': {
             get: getFlowerById
         },
         '/buy': {
@@ -58,15 +58,6 @@ const apiDocumentation = {
 
     },
 
-    components: {
-        securitySchemes: {
-            bearerAuth: {
-                type: 'http',
-                scheme: 'bearer',
-                bearerFormat: 'JWT',
-            },
-        },
-    },
 };
 
 module.exports = { apiDocumentation };
