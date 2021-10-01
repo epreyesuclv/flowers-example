@@ -4,7 +4,7 @@ require("dotenv").config
 const { USER, PASSWORD, PORT, DATABASE } = process.env
 
 const { buyFlowerNode ,fetchFromAllNodes} = require("../../fetchData/requestData");
-const { getAllflowers } = require("../../fetchData/floweQuerys")
+const { getAllflowers,selectflower } = require("../../fetchData/floweQuerys")
 
 const pool = new Pool({
     host: "localhost",
