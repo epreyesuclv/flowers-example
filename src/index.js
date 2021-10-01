@@ -11,7 +11,7 @@ app.use("/doc", swaggerui.serve, swaggerui.setup(apiDocumentation))
 
 require("./models/connection").sequelize.sync()
 const { fetchFromAllNodes } = require("./fetchData/requestData");
-const { frontRegister, frontLogin, backRegister, backLogin } = require("./jwt/middleware/auth");
+const { frontRegister, frontLogin, backRegister } = require("./jwt/middleware/auth");
 
 // database connection
 require("dotenv").config()

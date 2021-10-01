@@ -22,7 +22,7 @@ const apiDocumentation = {
             description: 'Local Server',
         },
         {
-            url: 'https://flowres-example.herokuapp.com/',
+            url: 'https://flowers-example.herokuapp.com/',
             description: 'Production Server',
         },
     ],
