@@ -121,7 +121,6 @@ const loginUserFront = {
                 },
             },
         },
-        required: true,
     },
     responses: {
         '200': {
@@ -141,27 +140,27 @@ const loginUserFront = {
                 },
             },
         },
-    },
-    '401': {
-        description: 'it is caused when cast parameters, please use only string format in all fields required',
 
-    },
-    '403': {
-        description:
-            'you need to include all parameter in the body , as json format'
+        '401': {
+            description: 'it is caused when cast parameters, please use only string format in all fields required',
 
-    },
-    '504': {
-        description:
-            'it is usually cause when the database is disconnected'
-    }, '503': {
-        description:
-            'I simply include this for testing , but is probable that was an error in my code  I apologize'
+        },
+        '403': {
+            description:
+                'you need to include all parameter in the body , as json format'
 
-    },
+        },
+        '504': {
+            description:
+                'it is usually cause when the database is disconnected'
+        }, '503': {
+            description:
+                'I simply include this for testing , but is probable that was an error in my code  I apologize'
 
+        },
+
+    }
 }
-
 
 
 module.exports = { createUserFront, loginUserFront };
