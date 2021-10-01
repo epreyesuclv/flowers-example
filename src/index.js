@@ -5,7 +5,7 @@ const { apiDocumentation } = require('../doc/apidoc.js')
 //for documentation with swagger
 const swaggerui = require("swagger-ui-express")
 
-app.use("/", swaggerui.serve, swaggerui.setup(apiDocumentation))
+app.use("/api-doc", swaggerui.serve, swaggerui.setup(apiDocumentation))
 
 
 
@@ -34,7 +34,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(require("./frontBuisness/APIroot/index"))
 
 app.post("/back_register", backRegister)
-app.post("/back_login", backLogin)
 app.post("/front_register", frontRegister)
 app.post("/front_login", frontLogin)
 
