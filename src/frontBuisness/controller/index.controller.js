@@ -3,8 +3,8 @@ const { Pool } = require("pg")
 require("dotenv").config
 const { USER, PASSWORD, PORT, DATABASE } = process.env
 
-const { buyFlowerNode ,fetchFromAllNodes} = require("../../fetchData/requestData");
-const { getAllflowers } = require("../../fetchData/floweQuerys")
+const { buyFlowerNode, fetchFromAllNodes } = require("../../fetchData/requestData");
+const { getAllflowers, selectflower } = require("../../fetchData/floweQuerys")
 
 const pool = new Pool({
     host: "localhost",
@@ -16,7 +16,7 @@ const pool = new Pool({
 
 
 const getflowers = async (req, res) => {
-    fetchFromAllNodes()
+    //fetchFromAllNodes()
     try {
         // while(true);
         const flowers = await getAllflowers()
@@ -32,9 +32,11 @@ const getflowers = async (req, res) => {
 
 const getflowerById = async (req, res) => {
     try {
-        id = req.params.name
-        arr = await selectflower(id)
-        //console.log(arr)
+
+        const id = req.params.name
+        const arr = await selectflower(id)
+        console.log("index.controller - getFlowerBtId", arr)
+
         res.status(200).json(arr)
     } catch (err) {
         res.status(503).send("somthing was wrong with the server see log")

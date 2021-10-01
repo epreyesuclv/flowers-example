@@ -1,8 +1,7 @@
-//todo
+
 const createUserBack = {
     tags: ['Users'],
     description: 'Create a new use in the system',
-    operationId: 'createUser',
 
     requestBody: {
         content: {
@@ -27,6 +26,10 @@ const createUserBack = {
                             description: "unencrypted user's password",
                             example: '!1234$#',
                         },
+                        endPoint:{
+                            type: 'string',
+                            example: 'http://localhost:4000/'
+                        }
                     },
                 },
             },
@@ -69,6 +72,7 @@ const createUserBack = {
                             token: {
                                 type: 'string',
                                 example: "asdhfuasdhfupoashfpuoahwfoh.wurfhuhz1234hfsp9dfy",
+                                description: 'you dont need to use this, the main server will check your currents flowers for you'
                             },
 
                         },
@@ -96,3 +100,8 @@ const createUserBack = {
     },
 };
 
+
+module.exports = {
+    createUserBack,
+    
+}

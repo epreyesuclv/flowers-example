@@ -34,7 +34,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(require("./frontBuisness/APIroot/index"))
 
 app.post("/back_register", backRegister)
-app.post("/back_login", backLogin)
 app.post("/front_register", frontRegister)
 app.post("/front_login", frontLogin)
 

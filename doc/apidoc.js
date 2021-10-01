@@ -1,15 +1,15 @@
 const { createUserFront, loginUserFront } = require("./usersFront.js")
-const { registerUserBack} = require("./usersBack")
+const { createUserBack } = require("./usersBack")
+const { getAllFlowers, getFlowerById, buyFlower } = require("./flowers")
 const apiDocumentation = {
     openapi: '3.0.1',
     info: {
         version: '1.3.0',
         title: 'Flower-exampleAPI',
-        description: 'Description of my API here',
-        termsOfService: 'https://mysite.com/terms',
+        description: 'This api is just for testing microservice purpose, nothing really happens if you use /buy enpoint, it just fetch the existent data in all other nodes',
         contact: {
-            name: 'Developer name',
-            email: 'dev@example.com',
+            name: 'Starcout',
+            email: 'epreyesuclv@gmail.com',
         },
         license: {
             name: 'Apache 2.0',
@@ -22,7 +22,7 @@ const apiDocumentation = {
             description: 'Local Server',
         },
         {
-            url: 'https://api.mysite.com',
+            url: 'https://flowres-example.herokuapp.com',
             description: 'Production Server',
         },
     ],
@@ -40,24 +40,21 @@ const apiDocumentation = {
 
         },
         '/front_login': {
-           post: loginUserFront
+            post: loginUserFront
         },
-         back_register: {
-             post: registerUserBack
-         },
-        // back_login: {
-        //     post: loginUserBack
+        '/back_register': {
+            post: createUserBack
+        },
 
-        // },
-        // flowers: {
-        //     get: getAllFlowers
-        // },
-        // 'flowers:id': {
-        //     get: getFlowerById
-        // },
-        // buy: {
-        //     post: buyFlower
-        // }
+        '/flowers': {
+            get: getAllFlowers
+        },
+        '/flowers:id': {
+            get: getFlowerById
+        },
+        '/buy': {
+            post: buyFlower
+        }
 
     },
 
