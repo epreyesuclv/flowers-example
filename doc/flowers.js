@@ -5,7 +5,7 @@ const getAllFlowers = {
 
     responses: {
         '200': {
-            description: 'Here are your flwoers !',
+            description: 'Here are your flwoers !, it will return an empty array if does have any flower',
             content: {
                 'application/json': {
                     schema: {
@@ -49,14 +49,14 @@ const getFlowerById = {
             name: 'id',
             in: 'path',
             description: 'flower name',
-            required: false,
+            required: true,
             type: 'string',
         },
     ],
 
     responses: {
         '200': {
-            description: 'User created successfully!',
+            description: 'returns the flower that you put in id, it returns null if there isnt a flowers with that name',
             content: {
                 'application/json': {
                     schema: {

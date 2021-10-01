@@ -125,7 +125,7 @@ const loginUserFront = {
     },
     responses: {
         '200': {
-            description: 'User created successfully!',
+            description: 'User login successfully!',
             content: {
                 'application/json': {
                     schema: {
