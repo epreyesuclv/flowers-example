@@ -1,4 +1,4 @@
-# testingNodeExpress"# testingNodeExpres" 
+# flower-example"# 
 this proyect is only for testing porpuse , I hope some day it will become reallity and helps people to undertake is litle business
 
 # What is this for?
@@ -16,3 +16,17 @@ this proyect is only for testing porpuse , I hope some day it will become realli
  you only need to pass (firstName,lastName,email,password,endPoint) in json format in the request body in the 
  "/back_register" endpoint, for more details see api-doc in the link above. The "endPoint" property refers to where 
  the node server is allocate. There is one on heroku see https://nodesellflowers.herokuapp.com/ and the documentation on https://nodesellflowers.herokuapp.com/api-doc/
+
+ # links
+
+https://nodesellflowers/herokuapp.com/ ----------node server
+https://nodesellflowers/herokuapp.com/api-doc/ --node server doc
+https://flower-example/herokuapp.com/ -----------main server
+https://flower-example/herokuapp.com/api-doc/ ---main server doc
+https://github.com/epreyesuclv/nodeSells/ -------node server code
+
+# Contact
+If you find some issue please contact me
+
+epreyesuclv@gmail.com
+epreyes@uclv.cu
