@@ -7,7 +7,7 @@ axios.defaults.timeout = 1000
 async function doGetAll() {
     const options = {
         method: 'GET',
-        url: `http://localhost:40/flowers`,
+        url: `http://localhost:4000/flowers`,
         headers: { 'Content-Type': 'application/json' }
     };
 
